@@ -1,0 +1,119 @@
+<link rel="stylesheet" type="text/css" href="CSS/login.css">
+<meta charset="utf-8">
+
+<div class="container">
+  <div class="form-container flip">
+    <form name="form2" class="login-form" id="form" action="main.php" method="post">
+      <h3 class="title">Accéder au référentiel</h3>
+      <div class="form-group" id="nom">
+        <input type="form-input" class="form-input" name="nom" id="Inom" tooltip-class="user-tooltip" placeholder="Nom" required="true" pattern="[A-Za-z éàçè-]+" title="Three letter country code"></input>
+        <span id="nom-tool"class="tooltip user-tooltip" style="display: none;"></span>
+      </div>
+      <div class="form-group" id="prenom">
+        <input type="form-input" class="form-input" name="prenom" id="Iprenom" tooltip-class="userp-tooltip" placeholder="Prénom" required="true" pattern="[A-Za-z éàçè-]+"></input>
+        <span id="prenom-tool"class="tooltip userp-tooltip"style="display: none;" ></span>
+      </div>
+      <div class="form-group" id="entreprise">
+        <input type="form-input" class="form-input" name="entreprise" id='Ientreprise' tooltip-class="entreprise-tooltip" placeholder="Entreprise" required="true" pattern="[A-Za-z0-9 éàçè-]+" ></input>
+        <span id="entreprise-tool"class="tooltip entreprise-tooltip" style="display: none;"></span>
+      </div>
+      <div class="form-group" id="session">
+        <input type="form-input" class="form-input" name="session" id='Isession' tooltip-class="session-tooltip" placeholder="Nom de la session" required="true" pattern="[A-Za-z0-9 éàçè-()_',;?!]+"> </input>
+        <span id="session-tool" class="tooltip session-tooltip" style="display: none;"></span>
+      </div>
+      <div class="form-group" id="evalPar">
+        <input type="form-input" class="form-input" name="evalPar" id='IevalPar' tooltip-class="evalPar-tooltip" placeholder="Evalué par" required="true" pattern="[A-Za-z0-9 éàçè-()_',;?!]+"> </input>
+        <span id="evalPar-tool" class="tooltip session-tooltip" style="display: none;"></span>
+      </div>
+      <div class="form-group-image">
+        <img id='image' src="Logo_noir.png" alt="Miss Mandarine" width="80%" height="27%">
+      </div>
+      <div class="form-group-button">
+        <button onclick="valider(); OnButton1()"class="login-button">Valider</button>
+      </div>
+    </form>
+    <div class="loading">
+      <div class="loading-spinner-large" style="display: none;"></div>
+      <div class="loading-spinner-small" style="display: none;"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="JS/login.js"></script>
+
+<script type="text/javascript">
+  
+  function valider(){
+    if ( document.getElementById("form").checkValidity() ){
+    	popup();
+      	//change_page();
+    }
+    else{ 
+      document.getElementById("image").style = "display : none;" ;
+      change_color();
+    }
+  }
+
+  function change_color(){
+
+    var nom = document.getElementById("Inom");
+    var prenom = document.getElementById("Iprenom");
+    var entreprise = document.getElementById("Ientreprise");
+    var session = document.getElementById("Isession");
+    var evalPar = document.getElementById("IevalPar");
+
+    if ( !nom.checkValidity() ){
+      document.getElementById("nom-tool").display = "block"
+      document.getElementById("nom-tool").style = "margin-left: 10px"
+      document.getElementById("nom-tool").innerHTML="Votre nom ne doit contenir que des lettres majuscules ou minuscules"
+    }
+    else document.getElementById("nom-tool").innerHTML="";
+/* ----------------------------------- */
+    if ( !prenom.checkValidity() ){
+      document.getElementById("prenom-tool").display = "block"
+      document.getElementById("prenom-tool").style = "margin-left: 10px"
+      document.getElementById("prenom-tool").innerHTML="Votre prénom ne doit contenir que des lettres majuscules ou minuscules"
+    }
+    else document.getElementById("prenom-tool").innerHTML="";
+/* ----------------------------------- */
+    if ( !entreprise.checkValidity() ){
+      document.getElementById("entreprise-tool").display = "block"
+      document.getElementById("entreprise-tool").style = "margin-left: 10px"
+      document.getElementById("entreprise-tool").innerHTML="Votre  nom d'entreprise ne doit contenir que des lettres ou des chiffres"
+    }
+    else document.getElementById("entreprise-tool").innerHTML="";
+/* ----------------------------------- */
+    if ( !session.checkValidity() ){
+      document.getElementById("session-tool").display = "block"
+      document.getElementById("session-tool").style = "margin-left: 10px"
+      document.getElementById("session-tool").innerHTML="Votre indice de session ne doit contenir que des lettres ou des chiffres"
+    }
+    else document.getElementById("session-tool").innerHTML="";
+
+/* ----------------------------------- */
+    if ( !evalPar.checkValidity() ){
+      document.getElementById("evalPar-tool").display = "block"
+      document.getElementById("evalPar-tool").style = "margin-left: 10px"
+      document.getElementById("evalPar-tool").innerHTML="Le nom ne doit contenir que des lettres majuscules ou minuscules"
+    }
+    else document.getElementById("evalPar-tool").innerHTML="";
+
+  }
+
+  function OnButton1()
+  {
+  	var nom = document.getElementById("Inom");
+    var prenom = document.getElementById("Iprenom");
+  	popup(nom.value,prenom.value);
+
+      //do(nom.innerHTML,prenom.innerHTML);cument.form2.action = "main.php"    // First target
+      //document.form2.target = "iframe1";    // Open in a iframe
+      document.form2.submit();        // Submit the page
+             // Submit the page
+      return true;
+  }
+
+</script>

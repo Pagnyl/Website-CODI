@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html>
+<?php
+if($_POST["nom"] == ""){
+
+	header("Location:login.html");
+}
+?>
+<head>
+  <meta charset="utf-8">
+  <title>Test</title>
+  <meta name="generator" content="Google Web Designer 8.0.3.0603">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Moyennementontserrat&display=swap" rel="stylesheet">
+  <style type="text/css" id="gwd-text-style">
+    p {
+      margin: 0px;
+    }
+    h1 {
+      margin: 0px;
+    }
+    h2 {
+      margin: 0px;
+    }
+    h3 {
+      margin: 0px;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="CSS/style.css">
+  <link rel="stylesheet" type="text/css" href="CSS/btn_style.css">
+  <link rel="stylesheet" type="text/css" href="CSS/arrow_style.css">
+  <link rel="stylesheet" type="text/css" href="CSS/scroll.css">
+  <link rel="stylesheet" type="text/css" href="CSS/btnQ1.css">
+
+  
+    
+</head>
+
+<body class="htmlNoPages" onload="question_competence1()">
+
+	<header>
+<!-- 		<button onclick="afficher_cpt();">AFFICHER</button>
+ -->		<!-- <p id="demo"></p> -->
+		<div class="presentation">
+			<div class="nom_prenom" >
+				<div id="prenom">
+					<p><?php echo $_POST["prenom"]; ?></p>
+					 <!--  -->
+					
+				</div>
+				<div id="nom">
+					<p><?php echo $_POST["nom"]; ?></p>
+					<!--  -->
+				</div>
+			</div>
+			<div class="entreprise" id="entreprise">
+				<p><?php echo $_POST["entreprise"]; ?></p>
+				<!-- <?php echo $_POST["entreprise"]; ?> -->
+			</div>
+			<div class="session" id="session">
+				<p><?php echo $_POST["session"]; ?>	</p>
+			</div>
+			<div class="eval" id="eval" style="display: none;">
+				<p><?php echo $_POST["evalPar"]; ?>	</p>
+			</div>
+		</div>
+
+	</header>
+	<div class="wrapper">	
+		<div class="arrow-steps clearfix">
+	          <div onclick="" class="step current" id="c1"> <span>Orientation vers les opportunités</span> </div>
+	          <div onclick="" class="step" id="c2"> <span>Compétences relationnelles</span> </div>
+	          <div onclick="" class="step" id="c3"> <span>Compétences conceptuelles</span> </div>
+	          <div onclick="" class="step" id="c4"> <span>Compétences d'organisation</span> </div>
+	          <div onclick="" class="step" id="c5"> <span>Compétences stratégiques</span> </div>
+	          <div onclick="" class="step" id="c6"> <span>Compétences d'engagement</span> </div>
+		</div>			
+	</div>
+ 
+
+	<div class="content" id="global">
+		<div class ="graphique">
+			<canvas id="myChart"></canvas>
+		</div>
+		<div class = "partie-gauche">		
+			<div class ="competence-1" id="cpt1">
+				<div class="partie-1" id="partie-1">
+					<div class="question-1">
+						<div class="blur">
+							<p class="cpt-title-css" id="cpt-title">Orientation vers les opportunités</p>
+							<hr>
+							<p class="w-question-1">Avez-vous observé cette compétence dans la startup que vous accompagnez ?</p>
+						</div>					
+					</div>
+					
+					<div class ="choixQ1">
+						<div class="choixQ1-lst text-center">            
+						    <ul class="choixQ1-lst">
+						        <li class="choixQ1-control" id='Faiblement' onclick="select_Q1('Faiblement')"><span id='sFaiblement'>Faiblement</span></li>
+						        <li class="choixQ1-control" id="Moyennement" onclick="select_Q1('Moyennement')"><span id='sMoyennement'>Moyennement</span></li>
+						        <li class="choixQ1-control" id="Fortement" onclick="select_Q1('Fortement')"><span id='sFortement'>Fortement</span></li>
+						        <li class="choixQ1-control" id="Très-Fortement" onclick="select_Q1('Très-Fortement')"><span id='sTrès Fortement'>Très Fortement</span></li>
+						    </ul>            
+						</div>
+					</div>									 
+				</div>
+
+				<div class="partie-2" id="partie-2">
+					<div class="question-2">
+						<div class="blur">
+							<p class="w-question-1" id=Title>Orientation vers les opportunités</p>
+						</div>
+					</div>	
+					<form>
+						<div class="msg_container" id="msg_court" style="visibility: hidden;">
+							<div class="msg_sep">
+								<div class="msg_court_before">
+									<div class="msg_court">Comportement actuel</div>
+								</div>
+							</div>
+							<div class="msg_sep">
+								<div class="msg_court_after">
+									<div class="msg_court">Début de la démarche</div>
+								</div>
+							</div>
+						</div>
+						<div class="grid-container">
+
+						  <div class="item1" id="item1"> </div>
+						  
+						  <div class="msg_long_before" id="msg_avant" style="visibility: visible;"> 
+							  <div class="msg_long" >Merci de considérer cette question selon votre comportement actuel</div>  
+						  </div>						  
+
+						  <div class="item2" id="item2-0" style="visibility: visible;">
+						  	<div class="s1" id="s1">
+						  	</div>
+						  	<div class="s2" id="s2" style="display: none;">
+						  	</div>
+						  	<div class="s3" id="s3" style="display: none;">
+						  	</div>
+						  	<div class="s4" id="s4" style="display: none;">
+						  	</div>
+						  	<div class="s5" id="s5" style="display: none;">
+						  	</div>
+						  </div>
+						  <div class="msg_long_after" id="msg_apres" style="display: none;">
+						  		<div class="msg_long">À quel niveau, imaginiez-vous être au début de la démarche Miss Mandarine ?</div>
+						  </div>
+						  <div class="item3" id="item3-0" style="visibility: hidden;">
+						  	<div class="sa1" id="sa1">
+						  	</div>
+						  	<div class="sa2" id="sa2" style="display: none;">
+						  	</div>
+						  	<div class="sa3" id="sa3" style="display: none;">
+						  	</div>
+						  	<div class="sa4" id="sa4" style="display: none;">
+						  	</div>
+						  	<div class="sa5" id="sa5" style="display: none;">
+						  	</div>
+						  </div>
+						  <div class="btn-slider-d"><button class="button" id="btn-slider" onclick="call_nxt_question()" type="button" style="display:none;"><span id='btn_text_slider'>Suivant</span></button></div>
+						  <div class="item4" id="item4" style="display: none ;"></div>
+						  <div class="item5" id="item5" style="display: none ;"></div>
+						  <div class="item6" id="item6" style="display: none ;"></div>
+						  <div class="item7" id="item7" style="display: none ;"></div>
+						  <div class="item8" id="item8" style="display: none ;"></div>  
+						  <div class="item9" id="item9" style="display: none ;"></div>
+						  <div class="item10" id="item10" style="display: none ;"></div>
+						  <div class="item11" id="item11" style="display: none ;"></div>
+						  <div class="item12" id="item12" style="display: none ;"></div>
+						  <div class="item13" id="item13" style="display: none ;"></div>
+						  <div class="item14" id="item14" style="display: none ;"></div>
+						  <div class="item15" id="item15" style="display: none ;"></div>
+						</div>
+					</form>
+				</div>
+				<div class="partie-3" id="partie-3">
+					<div class="marge">
+						<div class="question-1">
+							<div class="blur">
+								<p class="cpt-title-css" id="cpt-title3">Orientation vers les opportunités</p>
+								<hr>
+								<p class="w-question-1">Expliquez comment vous pouvez mobiliser cette compétence (partiellement ou totalement) dans votre quotidien professionnel ?</p>
+							</div>
+						</div>					
+						<div class="textarea3">
+							<form action="/action_page.php">
+								<div>
+									<textarea id="textarea" name="reponse-3" rows="10" cols="250" maxlength="500" placeholder="500 caractères max" onchange="save_transit()"></textarea>
+								</div>							
+							</form>
+						</div>
+					</div>			
+				</div>
+			</div>
+			<div class= 'partie-gauche-bottom'>
+				
+				<div class="roow">
+					<div class="tm-col-left text-center">            
+					    <ul class="tm-bg-controls-wrapper">
+					        <li class="tm-bg-control active" id="10" onclick="partie_1_f()"></li>
+					        <li class="tm-bg-control" id="11" onclick="partie_2_f()"></li>
+					        <li class="tm-bg-control" id="12" onclick="partie_3_f()"></li>
+					    </ul>            
+					</div>
+				</div>
+				<div class="btn_next">
+					<button class="button" id="btn" style="vertical-align:middle" onclick="btn_click_next()"><span id='btn_text'>Suivant</span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<footer >
+  
+        <div class="div-du-bas" style="display: flex; justify-content: center;">
+            <img id='image' src="Logo_noir.png" alt="Miss Mandarine" style="margin:15px; width: 300px;">
+        </div>
+        <h1 align="left" style="color:black; font-style: italic; font-size: 12px; margin: 20px ">Copyright © 2020 <strong>Miss Mandarine</strong></h1>
+    </footer>
+
+	<script src="JS/graph.js"></script>
+	<script src="JS/competences_implementation.js"></script>
+	<script src="JS/reset.js"></script>
+	<script src="JS/save_data.js"></script>	
+	<script src="JS/mail.js"></script>
+	<script src="JS/main.js"></script>
+	<script type="text/javascript">
+
+		var ansQ1 = 0;
+
+		function select_Q1(i){
+			clear_ansQ1();
+			document.getElementById(i).className = "choixQ1-control active";
+			ansQ1 = i;
+			if(ansQ1 == 'Très-Fortement'){
+				ansQ1 = 'Très fortement';
+			}
+		}
+
+		function clear_ansQ1(){
+			document.getElementById("Faiblement").className = "choixQ1-control";
+			document.getElementById("Moyennement").className = "choixQ1-control";
+			document.getElementById("Fortement").className = "choixQ1-control";
+			document.getElementById("Très-Fortement").className = "choixQ1-control";
+		}
+
+		function get_ansQ1(){
+			return ansQ1;
+		}
+
+		function reset_Q1(){
+			ansQ1 = '';
+		}
+
+		
+
+
+/*		function focusable(i){
+			var btn = "btn" + i.toString();
+			document.getElementById(i).style.backgroundColor = 'rgba(255,255,255,0.5)';
+			document.getElementById(i).style.border = '2px solid rgba(255,255,255,0.5)';
+			document.getElementById(i).style.boxShadow = '0px 0px 0px 0px #EEE inset';
+
+		}*/
+
+
+		
+	</script>
+	
+
+    </body>
+
+</html>
